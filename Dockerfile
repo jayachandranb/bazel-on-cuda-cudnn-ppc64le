@@ -2,7 +2,9 @@ FROM nvidia/cuda-ppc64le:8.0-cudnn6-devel-ubuntu16.04
 LABEL maintainer="Jayachandran B (ANZ Engineering)"
 
 # Install Python 3.5 (and somemore) and make it the default
-RUN apt-get update && \
+RUN rm -rf /var/cache/apt/archives && \
+    mkdir -p /var/cache/apt/archives && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
           autoconf \
           build-essential \

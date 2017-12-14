@@ -53,10 +53,12 @@ RUN rm -rf /var/cache/apt/archives && \
     ln -s /usr/bin/python3.5-config /usr/bin/python-config
 
 RUN pip3 install --no-cache-dir --upgrade pip
-RUN cd /opt && \
-    wget https://nodejs.org/dist/v8.9.1/node-v8.9.1-linux-ppc64le.tar.xz && \
-    tar xpvf node-v8.9.1-linux-ppc64le.tar.xz -C /opt/node && \
-    rm -f node-v8.9.1-linux-ppc64le.tar.xz
 
 COPY bazel/bazel /usr/bin/bazel
 COPY protobuf /opt/protobuf
+
+RUN cd /opt && \
+    mkdir node && \
+    wget https://nodejs.org/dist/v8.9.1/node-v8.9.1-linux-ppc64le.tar.xz && \
+    tar xpvf node-v8.9.1-linux-ppc64le.tar.xz -C /opt/node --strip-components=1 && \
+    rm -f node-v8.9.1-linux-ppc64le.tar.xz
